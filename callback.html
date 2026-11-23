@@ -1,0 +1,15 @@
+<!DOCTYPE html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Shorts Studio — connexion TikTok</title><link rel="stylesheet" href="style.css"></head><body>
+<h1>Connexion TikTok</h1><div id="out">…</div>
+<script>
+const q = new URLSearchParams(location.search), code = q.get('code'), err = q.get('error');
+const o = document.getElementById('out');
+if (code) {
+  o.innerHTML = '<p>Copie ce code et colle-le dans l’atelier (Réglages → TikTok → « Valider le code »). Il n’est valable que quelques minutes.</p><div class="code" id="c"></div><p><button id="b">Copier le code</button></p>';
+  document.getElementById('c').textContent = code;
+  document.getElementById('b').onclick = () => navigator.clipboard.writeText(code).then(() => { document.getElementById('b').textContent = 'Copié ✓'; });
+} else if (err) {
+  o.innerHTML = '<p>TikTok a refusé la connexion :</p><div class="code" id="c"></div>'; document.getElementById('c').textContent = err + ' — ' + (q.get('error_description') || '');
+} else o.innerHTML = '<p>Cette page reçoit le code de connexion TikTok de l’atelier Shorts Studio. Rien à faire ici.</p>';
+</script>
+<p><a href="index.html">Shorts Studio</a> · <a href="privacy.html">Privacy Policy</a></p></body></html>
